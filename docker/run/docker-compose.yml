@@ -1,8 +1,14 @@
 services:
   agent-zero:
     container_name: agent-zero
-    image: frdel/agent-zero:latest
+    build:
+      context: ../..
+      dockerfile: docker/run/Dockerfile
+      args:
+        BRANCH: development
     volumes:
-      - ./agent-zero:/a0
+      - ../..:/a0
     ports:
-      - "50080:80"
+      - "4000:80"
+      # - http://localhost:4000/
+      # - http://127.0.0.1:4000/
