@@ -5,16 +5,6 @@
 - **Agent Zero Alternative:** http://127.0.0.1:4000/
 - **Ollama API:** http://localhost:11434/ (when running with GPU profile)
 
-## 🤖 Ollama Models & Management
-
-### Available Models (Downloaded)
-```
-NAME                                                    SIZE      MODIFIED       
-hf.co/unsloth/DeepSeek-R1-0528-Qwen3-8B-GGUF:Q5_K_XL    5.9 GB    13 days ago    
-gemma3:4b                                               3.3 GB    4 weeks ago    
-gemma3:4b-it-qat                                        4.0 GB    5 weeks ago
-qwen3:4b                                                2.6 GB    5 weeks ago
-qwen2.5:7b-instruct-q4_K_M                              4.7 GB    6 weeks ago
 ```
 
 ### Ollama Commands
