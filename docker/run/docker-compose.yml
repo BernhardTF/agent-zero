@@ -1,17 +1,25 @@
 services:
   agent-zero:
+    image: frdel/agent-zero-run:latest
     container_name: agent-zero
-    build:
-      context: ../..
-      dockerfile: docker/run/Dockerfile
-      args:
-        BRANCH: development
-    volumes:
-      - ../..:/a0
     ports:
-      - "4000:80"
-    networks:
-      - app-network
+      - "4001:80"
+    # --- mounts ---
+    volumes:
+      # live source code (hot-reload)
+      - "D:/Bear Projects/Agent Zero:/a0"            # MOUNT TO /a0 DIRECTLY
+      # persistent runtime data (named volumes)
+      - a0_data:/a0/tmp            # settings.json, memory, faiss, …
+      - a0_logs:/a0/logs           # log files
+      - a0_models:/root/.cache     # HF / Ollama downloads, etc.
+volumes:
+  a0_data:
+  a0_logs:
+  a0_models:
+  ollama_models:
+    external: true
+    name: localai_ollama_storage
+
 
   ollama:
     image: ollama/ollama:latest
@@ -30,12 +38,8 @@ services:
             - capabilities: ["gpu"]
               count: all
     profiles: ["gpu"]
-
-volumes:
-  ollama_models:
-    external: true
-    name: localai_ollama_storage
-
+    
 networks:
   app-network:
     driver: bridge
+
