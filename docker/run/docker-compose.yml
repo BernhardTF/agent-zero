@@ -1,8 +1,18 @@
 services:
   agent-zero:
-    container_name: agent-zero
     image: frdel/agent-zero-run:latest
+    container_name: agent-zero
     ports:
       - "4001:80"
-    volumes:                        
-      - "D:/Bear Projects/Agent Zero:/git/agent-zero"
+    # --- mounts ---
+    volumes:
+      # live source code (hot-reload)
+      - "D:/Bear Projects/Agent Zero:/a0"            # MOUNT TO /a0 DIRECTLY
+      # persistent runtime data (named volumes)
+      - a0_data:/a0/tmp            # settings.json, memory, faiss, …
+      - a0_logs:/a0/logs           # log files
+      - a0_models:/root/.cache     # HF / Ollama downloads, etc.
+volumes:
+  a0_data:
+  a0_logs:
+  a0_models:
